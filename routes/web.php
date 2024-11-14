@@ -24,6 +24,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/tabel-monitoring', [TabelMonitoringController::class, 'index'])->name('tabel-monitoring');
 Route::get('/monitoring-komunikasi', [MonitoringKomunikasiController::class, 'index'])->name('monitoring-komunikasi');
