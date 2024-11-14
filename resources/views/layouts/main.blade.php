@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Components / Accordion - NiceAdmin Bootstrap Template</title>
+    <title>{{ $title }} | Penyinaran Buah Naga</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -112,6 +112,8 @@
     <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
 
     <script src="{{ asset('assets/js/main.js') }}"></script>
+
+    @yield('js')
 
 </body>
 
