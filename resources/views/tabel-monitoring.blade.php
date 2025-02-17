@@ -11,59 +11,70 @@
     </div>
 @endsection
 
-<?php
-
-$data = [];
-
-for ($i = 1; $i <= 15; $i++) {
-    $row = [
-        'No' => $i,
-        'Waktu' => date('Y-m-d H:i', strtotime('2024-11-14 10:00 +' . $i * 5 . ' minutes')),
-        'IC_1' => rand(50, 700),
-        'Lampu_1' => rand(0, 1) ? 'Hidup' : 'Mati',
-        'IC_2' => rand(50, 700),
-        'Lampu_2' => rand(0, 1) ? 'Hidup' : 'Mati',
-        'IC_3' => rand(50, 700),
-        'Lampu_3' => rand(0, 1) ? 'Hidup' : 'Mati',
-    ];
-    $data[] = $row;
-}
-
-?>
-
 @section('content')
     <div class="row">
         <div class="col-sm-12">
             <div class="card shadow">
                 <div class="card-body">
-                    <table class="table datatable">
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>Waktu</th>
-                                <th>IC 1</th>
-                                <th>Lampu</th>
-                                <th>IC 2</th>
-                                <th>Lampu</th>
-                                <th>IC 3</th>
-                                <th>Lampu</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($data as $row) : ?>
-                            <tr>
-                                <td><?= $row['No'] ?></td>
-                                <td><?= $row['Waktu'] ?></td>
-                                <td><?= $row['IC_1'] ?></td>
-                                <td><?= $row['Lampu_1'] ?></td>
-                                <td><?= $row['IC_2'] ?></td>
-                                <td><?= $row['Lampu_2'] ?></td>
-                                <td><?= $row['IC_3'] ?></td>
-                                <td><?= $row['Lampu_3'] ?></td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3 class="mt-3">Slave 1</h3>
+                            <table class="table datatable">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">No.</th>
+                                        <th class="text-center">Waktu</th>
+                                        <th class="text-center">Value</th>
+                                        <th class="text-center">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($slave1 as $item)
+                                        <tr>
+                                            <td class="text-center">{{ $loop->iteration }}</td>
+                                            <td class="text-center">{{ $item->waktu }}</td>
+                                            <td class="text-center">{{ $item->value }}</td>
+                                            <td class="text-center">{{ $item->status }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3 class="mt-3">Slave 2</h3>
+                            <table class="table datatable">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">No.</th>
+                                        <th class="text-center">Waktu</th>
+                                        <th class="text-center">Value</th>
+                                        <th class="text-center">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($slave2 as $item)
+                                        <tr>
+                                            <td class="text-center">{{ $loop->iteration }}</td>
+                                            <td class="text-center">{{ $item->waktu }}</td>
+                                            <td class="text-center">{{ $item->value }}</td>
+                                            <td class="text-center">{{ $item->status }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

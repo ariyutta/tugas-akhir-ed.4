@@ -52,11 +52,11 @@
                     <i class="bi bi-layout-text-window-reverse"></i><span>Tabel Monitoring</span>
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('monitoring-komunikasi') }}">
                     <i class="bi bi-bar-chart"></i><span>Monitoring Komunikasi</span>
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </aside>
 
