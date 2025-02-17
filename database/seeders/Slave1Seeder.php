@@ -17,7 +17,7 @@ class Slave1Seeder extends Seeder
         $statuses = ['hidup', 'mati'];
 
         for ($i = 0; $i < 15; $i++) {
-            DB::table('slave1')->insert([
+            DB::table('slave1s')->insert([
                 'waktu' => Carbon::now()->subHours($i),
                 'value' => rand(1000, 10000) / 100,
                 'status' => $statuses[array_rand($statuses)],
