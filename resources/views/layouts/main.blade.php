@@ -52,11 +52,11 @@
                     <i class="bi bi-layout-text-window-reverse"></i><span>Tabel Monitoring</span>
                 </a>
             </li>
-            {{-- <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('monitoring-komunikasi') }}">
                     <i class="bi bi-bar-chart"></i><span>Monitoring Komunikasi</span>
                 </a>
-            </li> --}}
+            </li>
         </ul>
     </aside>
 
@@ -71,7 +71,7 @@
 
     <footer id="footer" class="footer">
         <div class="copyright">
-            <span>Aplikasi Web Penyinaran Buah Naga 2024</span>
+            <span>Aplikasi Web Penyinaran Buah Naga</span>
         </div>
     </footer>
 
@@ -87,6 +87,8 @@
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
     @yield('js')
+    @stack('scripts')
+
 
 </body>
 
