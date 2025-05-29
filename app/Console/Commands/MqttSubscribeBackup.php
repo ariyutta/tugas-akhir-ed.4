@@ -164,7 +164,7 @@ class MqttSubscribe extends Command
                 'sent_at' => $sent_at,
                 'received_at' => $received_at,
             ]);
-            
+
             // Menghitung packet loss jika sent_at ada (asumsi tidak ada packet loss jika data diterima dengan sent_at)
             $packetLossPercentage = 0;  // Tidak ada packet loss jika sent_at ada
             $this->info("📥 Packet Loss untuk Slave{$slaveId}: {$packetLossPercentage}%");

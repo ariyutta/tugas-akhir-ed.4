@@ -3,11 +3,15 @@
 @section('panel')
     <div class="pagetitle">
         <h1 style="margin-bottom: 30px;">{{ $title }}</h1>
-        <nav>
-            <!-- <ol class="breadcrumb">
-                <li class="breadcrumb-item active">{{ $title }}</li>
-            </ol> -->
-        </nav>
+        <form method="GET" action="{{ route('tabel-monitoring') }}" class="mb-4">
+            <label for="tanggal">Filter Tanggal:</label>
+            <input type="date" name="tanggal" id="tanggal" value="{{ request('tanggal', $tanggal) }}">
+            <button type="submit" class="btn btn-primary btn-sm">Tampilkan</button>
+        </form>
+
+        <div class="alert alert-info" role="alert">
+            Menampilkan data untuk tanggal: <strong>{{ \Carbon\Carbon::parse($tanggal)->translatedFormat('l, d F Y') }}</strong>
+        </div>
     </div>
 @endsection
 

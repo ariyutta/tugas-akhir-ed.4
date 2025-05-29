@@ -15,13 +15,13 @@ class MonitoringKomunikasiController extends Controller
     public function index(Request $request)
     {
         $title = 'Monitoring Komunikasi';
-        
+
         // Ambil tanggal dari input atau default ke hari ini
         $tanggal = $request->input('tanggal', Carbon::now()->toDateString());
 
         // Mengambil data dari tabel slave_packet_losses dan slave_delays berdasarkan tanggal
-        $dataPacketLoss = SlavePacketLoss::whereDate('sent_at', $tanggal)->get(); // Data Packet Loss
-        $dataDelay = SlaveDelay::whereDate('sent_at', $tanggal)->get(); // Data Delay
+        $dataPacketLoss = SlavePacketLoss::whereDate('sent_at', $tanggal)->orderBy('sent_at','DESC')->get(); // Data Packet Loss
+        $dataDelay = SlaveDelay::whereDate('sent_at', $tanggal)->orderBy('sent_at','DESC')->get(); // Data Delay
 
         // Memetakan relasi ke Slave1 atau Slave2 secara eksplisit
         $dataPacketLoss->map(function ($item) {
@@ -44,12 +44,12 @@ class MonitoringKomunikasiController extends Controller
         $data = $dataPacketLoss->merge($dataDelay);
 
         // Persiapkan data untuk grafik
-        $delayData = $data->pluck('delay'); // Mengambil data delay
-        $packetLossData = $data->pluck('lost_packets')->map(function ($value) {
+        $delayData = $data->take(20)->pluck('delay'); // Mengambil data delay
+        $packetLossData = $data->take(20)->pluck('lost_packets')->map(function ($value) {
             // Mengganti null dengan 0 dan memastikan hanya ada 0 atau 1
             return $value == null ? 0 : $value;
         });        // Mengambil data packet loss percentage
-        $labels = $data->pluck('sent_at')->map(function ($date) {
+        $labels = $data->take(20)->pluck('sent_at')->map(function ($date) {
             return Carbon::parse($date)->format('H:i'); // Format jam dan menit
         });
 

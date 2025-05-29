@@ -1,10 +1,16 @@
 <?php
+
 namespace App\Console\Commands;
 
+use App\Models\Slave1;
+use App\Models\Slave2;
+use App\Models\SlaveDelay;
+use App\Models\SlavePacketLoss;
 use App\Services\HiveMQService;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Console\Command;
+use Log;
 
 class MqttSubscriber extends Command
 {
@@ -147,29 +153,43 @@ class MqttSubscriber extends Command
 
     function insertIfReady()
     {
+        // Slave1
         if ($this->array_lux1 && $this->array_status1) {
-            Slave1::create([
-                'waktu' => Carbon::now(),
-                'value' => $this->array_lux1,
-                'status' => $this->array_status1,
-            ]);
+            $this->info("📥 Data untuk Slave1: {$this->array_lux1}, {$this->array_status1}");
+
+            try {
+                Slave1::create([
+                    'waktu' => Carbon::now('Asia/Jakarta'),
+                    'value' => $this->array_lux1,
+                    'status' => $this->array_status1,
+                ]);
+                $this->info("✅ Slave1 Tersimpan: {$this->array_lux1}, {$this->array_status1}");
+            } catch (\Exception $e) {
+                $this->error("❌ Gagal menyimpan data Slave1: " . $e->getMessage());
+            }
 
             $this->array_lux1 = null;
             $this->array_status1 = null;
         }
-        return $this->info("✅ Slave1 Tersimpan: {$this->array_lux1}, {$this->array_status1}");
 
+        // Slave2
         if ($this->array_lux2 && $this->array_status2) {
-            Slave2::create([
-                'waktu' => Carbon::now(),
-                'value' => $this->array_lux2,
-                'status' => $this->array_status2,
-            ]);
+            $this->info("📥 Data untuk Slave2: {$this->array_lux2}, {$this->array_status2}");
+
+            try {
+                Slave2::create([
+                    'waktu' => Carbon::now('Asia/Jakarta'),
+                    'value' => $this->array_lux2,
+                    'status' => $this->array_status2,
+                ]);
+                $this->info("✅ Slave2 Tersimpan: {$this->array_lux2}, {$this->array_status2}");
+            } catch (\Exception $e) {
+                $this->error("❌ Gagal menyimpan data Slave2: " . $e->getMessage());
+            }
 
             $this->array_lux2 = null;
             $this->array_status2 = null;
         }
-        return $this->info("✅ Slave2 Tersimpan: {$this->array_lux2}, {$this->array_status2}");
     }
 
     function processDelayAndPacketLoss($topic, $data, $slaveId)
@@ -178,7 +198,7 @@ class MqttSubscriber extends Command
         $sent_at = isset($data['timestamp']) ? Carbon::createFromTimestamp($data['timestamp']) : null;
 
         // Mendefinisikan received_at
-        $received_at = Carbon::now(); // Mendapatkan waktu saat data diterima
+        $received_at = Carbon::now('Asia/Jakarta'); // Mendapatkan waktu saat data diterima
 
         // Cek apakah sent_at ada
         if ($sent_at) {

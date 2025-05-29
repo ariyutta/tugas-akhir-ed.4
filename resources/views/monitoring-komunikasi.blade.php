@@ -30,7 +30,7 @@
             <div class="card shadow mb-4">
                 <div class="card-body">
                     <h5 class="card-title">Grafik Delay</h5>
-                    <canvas id="delayChart" style="height: 400px;"></canvas>
+                    <div id="delayChart" style="height: 400px;"></div>
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
             <div class="card shadow mb-4">
                 <div class="card-body">
                     <h5 class="card-title">Grafik Packet Loss</h5>
-                    <canvas id="packetLossChart" style="height: 400px;"></canvas>
+                    <div id="packetLossChart" style="height: 400px;"></div>
                 </div>
             </div>
         </div>
@@ -66,16 +66,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach ($data as $row)
-    <tr>
-        <td>{{ $loop->iteration }}</td>
-        <td>{{ $row->sent_at ?? 'N/A' }}</td>
-        <td>{{ $row->received_at ?? 'N/A' }}</td>
-        <!-- <td>{{ $row->topic }}</td> -->
-        <td>{{ $row->delay ?? 'N/A' }}</td>
-        <td>{{ $row->lost_packets == 0 ? 'Tidak Ada' : 'Ada' }}</td>
-    </tr>
-@endforeach
+                            @foreach ($data as $row)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $row->sent_at ?? 'N/A' }}</td>
+                                    <td>{{ $row->received_at ?? 'N/A' }}</td>
+                                    <!-- <td>{{ $row->topic }}</td> -->
+                                    <td>{{ $row->delay ?? 'N/A' }}</td>
+                                    <td>{{ $row->lost_packets == 0 ? 'Tidak Ada' : 'Ada' }}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -98,74 +98,84 @@
         });
 
         // Grafik Delay
-        var ctxDelay = document.getElementById('delayChart').getContext('2d');
-        var delayChart = new Chart(ctxDelay, {
-            type: 'line',
-            data: {
-                labels: @json($labels), // Data waktu
-                datasets: [{
-                    label: 'Delay (ms)',
-                    data: @json($delayData), // Data delay
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    fill: true
-                }]
+        var optionsDelay = {
+            chart: {
+                type: 'area',
+                height: 350
             },
-            options: {
-                responsive: true,
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Waktu'
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Delay (ms)'
-                        },
-                        beginAtZero: true
-                    }
+            series: [{
+                name: 'Delay (ms)',
+                data: @json($delayData)
+            }],
+            xaxis: {
+                categories: @json($labels),
+                title: {
+                    text: 'Waktu'
                 }
-            }
-        });
+            },
+            yaxis: {
+                title: {
+                    text: 'Delay (ms)'
+                },
+                min: 0
+            },
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shadeIntensity: 1,
+                    opacityFrom: 0.3,
+                    opacityTo: 0.1,
+                    stops: [0, 100]
+                }
+            },
+            colors: ['#4bc0c0']
+        };
+
+        var delayChart = new ApexCharts(document.querySelector("#delayChart"), optionsDelay);
+        delayChart.render();
 
         // Grafik Packet Loss
-        var ctxPacketLoss = document.getElementById('packetLossChart').getContext('2d');
-        var packetLossChart = new Chart(ctxPacketLoss, {
-            type: 'line',
-            data: {
-                labels: @json($labels), // Data waktu
-                datasets: [{
-                    label: 'Packet Loss (%)',
-                    data: @json($packetLossData), // Data packet loss
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    fill: true
-                }]
+        var optionsPacketLoss = {
+            chart: {
+                type: 'area',
+                height: 350
             },
-            options: {
-                responsive: true,
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Waktu'
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Packet Loss'
-                        },
-                        beginAtZero: false,  // Jangan mulai dari 0 untuk sumbu Y
-                        min: -0.05, // Set sumbu Y mulai dari 0.05 untuk menampilkan garis
-                        max: 1   // Batas maksimum untuk 100% (packet loss)
+            series: [{
+                name: 'Packet Loss (%)',
+                data: @json($packetLossData)
+            }],
+            xaxis: {
+                categories: @json($labels),
+                title: {
+                    text: 'Waktu'
+                }
+            },
+            yaxis: {
+                title: {
+                    text: 'Packet Loss'
+                },
+                min: 0,
+                max: 1,  // Batas maksimum untuk 100% (packet loss)
+                labels: {
+                    formatter: function(value) {
+                        return (value * 100).toFixed(0) + '%';
                     }
                 }
-            }
-        });
+            },
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shadeIntensity: 1,
+                    opacityFrom: 0.3,
+                    opacityTo: 0.1,
+                    stops: [0, 100]
+                }
+            },
+            colors: ['#ff6384']
+        };
+
+        var packetLossChart = new ApexCharts(document.querySelector("#packetLossChart"), optionsPacketLoss);
+        packetLossChart.render();
     });
 </script>
 
