@@ -1,6 +1,5 @@
-
 <div class="row">
-    <!-- Wadah besar -->
+    <!-- Wadah besar untuk Kebun 1 -->
     <div class="card shadow w-100">
         <div class="card-body">
             <h2 class="card-title text-center" style="font-size:40px">Kebun 1</h2>
@@ -8,7 +7,7 @@
             <hr>
 
             <div class="row">
-                <!-- Kotak Intensitas Cahaya -->
+                <!-- Kotak Intensitas Cahaya untuk Slave 1 -->
                 <div class="col-sm-4">
                     <div class="card shadow">
                         <div class="card-body">
@@ -17,14 +16,15 @@
                                 <i class="bi bi-brightness-high" style="font-size:70px"></i>
                                 <h1 class="mt-4" style="font-size: 50px">{{ $slave1->value }}</h1>
                             </div>
-                            <!-- <div style="border: 1px solid rgb(192, 192, 192); border-radius:10px" class="px-2 py-1">
-                                <span>Delay : {{ $slave1->delay }} detik</span>
-                            </div> -->
+                            <div style="border: 1px solid rgb(192, 192, 192); border-radius:10px" class="px-2 py-1">
+                                <!-- Menampilkan delay untuk slave1 -->
+                                <span>Delay: {{ $slave1Delay }} ms</span>  <!-- Delay untuk slave1 -->
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Kotak Status Lampu 1 -->
+                <!-- Kotak Status Lampu 1 untuk Slave 1 -->
                 <div class="col-sm-4">
                     <div class="card shadow">
                         <div class="card-body">
@@ -33,14 +33,15 @@
                                 <i class="bi bi-lamp-fill" style="font-size:70px"></i>
                                 <h1 class="mt-4" style="font-size: 50px">{{ $slave1->status }}</h1>
                             </div>
-                            <!-- <div style="border: 1px solid rgb(192, 192, 192); border-radius:10px" class="px-2 py-1">
-                                <span>Delay : {{ $slave1->delay }} detik</span>
-                            </div> -->
+                            <div style="border: 1px solid rgb(192, 192, 192); border-radius:10px" class="px-2 py-1">
+                                <!-- Menampilkan delay untuk slave1 -->
+                                <span>Delay: {{ $slave1Delay }} ms</span>  <!-- Delay untuk slave1 -->
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Kotak Status Lampu 2 -->
+                <!-- Kotak Status Lampu 2 untuk Slave 1 -->
                 <div class="col-sm-4">
                     <div class="card shadow">
                         <div class="card-body">
@@ -49,9 +50,10 @@
                                 <i class="bi bi-lamp-fill" style="font-size:70px"></i>
                                 <h1 class="mt-4" style="font-size: 50px">{{ $slave1->status }}</h1>
                             </div>
-                            <!-- <div style="border: 1px solid rgb(192, 192, 192); border-radius:10px" class="px-2 py-1">
-                                <span>Delay : {{ $slave1->delay }} detik</span>
-                            </div> -->
+                            <div style="border: 1px solid rgb(192, 192, 192); border-radius:10px" class="px-2 py-1">
+                                <!-- Menampilkan delay untuk slave1 -->
+                                <span>Delay: {{ $slave1Delay }} ms</span>  <!-- Delay untuk slave1 -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -61,7 +63,7 @@
 </div>
 
 <div class="row">
-    <!-- Wadah besar -->
+    <!-- Wadah besar untuk Kebun 2 -->
     <div class="card shadow w-100">
         <div class="card-body">
             <h2 class="card-title text-center" style="font-size:40px">Kebun 2</h2>
@@ -69,7 +71,7 @@
             <hr>
 
             <div class="row">
-                <!-- Kotak Intensitas Cahaya -->
+                <!-- Kotak Intensitas Cahaya untuk Slave 2 -->
                 <div class="col-sm-4">
                     <div class="card shadow">
                         <div class="card-body">
@@ -78,14 +80,15 @@
                                 <i class="bi bi-brightness-high" style="font-size:70px"></i>
                                 <h1 class="mt-4" style="font-size: 50px">{{ $slave2->value }}</h1>
                             </div>
-                            <!-- <div style="border: 1px solid rgb(192, 192, 192); border-radius:10px" class="px-2 py-1">
-                                <span>Delay : {{ $slave2->delay }} detik</span>
-                            </div> -->
+                            <div style="border: 1px solid rgb(192, 192, 192); border-radius:10px" class="px-2 py-1">
+                                <!-- Menampilkan delay untuk slave2 -->
+                                <span>Delay: {{ $slave2Delay }} ms</span>  <!-- Delay untuk slave2 -->
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Kotak Status Lampu 3 -->
+                <!-- Kotak Status Lampu 3 untuk Slave 2 -->
                 <div class="col-sm-4">
                     <div class="card shadow">
                         <div class="card-body">
@@ -94,14 +97,15 @@
                                 <i class="bi bi-lamp-fill" style="font-size:70px"></i>
                                 <h1 class="mt-4" style="font-size: 50px">{{ $slave2->status }}</h1>
                             </div>
-                            <!-- <div style="border: 1px solid rgb(192, 192, 192); border-radius:10px" class="px-2 py-1">
-                                <span>Delay : {{ $slave2->delay }} detik</span>
-                            </div> -->
+                            <div style="border: 1px solid rgb(192, 192, 192); border-radius:10px" class="px-2 py-1">
+                                <!-- Menampilkan delay untuk slave2 -->
+                                <span>Delay: {{ $slave2Delay }} ms</span>  <!-- Delay untuk slave2 -->
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Kotak Status Lampu 4 -->
+                <!-- Kotak Status Lampu 4 untuk Slave 2 -->
                 <div class="col-sm-4">
                     <div class="card shadow">
                         <div class="card-body">
@@ -110,9 +114,10 @@
                                 <i class="bi bi-lamp-fill" style="font-size:70px"></i>
                                 <h1 class="mt-4" style="font-size: 50px">{{ $slave2->status }}</h1>
                             </div>
-                            <!-- <div style="border: 1px solid rgb(192, 192, 192); border-radius:10px" class="px-2 py-1">
-                                <span>Delay : {{ $slave2->delay }} detik</span>
-                            </div> -->
+                            <div style="border: 1px solid rgb(192, 192, 192); border-radius:10px" class="px-2 py-1">
+                                <!-- Menampilkan delay untuk slave2 -->
+                                <span>Delay: {{ $slave2Delay }} ms</span>  <!-- Delay untuk slave2 -->
+                            </div>
                         </div>
                     </div>
                 </div>

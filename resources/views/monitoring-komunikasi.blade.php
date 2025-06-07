@@ -60,7 +60,6 @@
                                 <th class="text-center">No.</th>
                                 <th class="text-center">Waktu Kirim</th>
                                 <th class="text-center">Waktu Diterima</th>
-                                <!-- <th class="text-center">Topik</th> -->
                                 <th class="text-center">Delay (ms)</th>
                                 <th class="text-center">Data Hilang</th>
                             </tr>
@@ -71,7 +70,6 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $row->sent_at ?? 'N/A' }}</td>
                                     <td>{{ $row->received_at ?? 'N/A' }}</td>
-                                    <!-- <td>{{ $row->topic }}</td> -->
                                     <td>{{ $row->delay ?? 'N/A' }}</td>
                                     <td>{{ $row->lost_packets == 0 ? 'Tidak Ada' : 'Ada' }}</td>
                                 </tr>
@@ -128,7 +126,16 @@
                     stops: [0, 100]
                 }
             },
-            colors: ['#4bc0c0']
+            colors: ['#4bc0c0'],
+            dataLabels: {
+                enabled: true, // Menyalakan data labels jika ingin, tetapi akan dihilangkan menggunakan formatter
+                formatter: function() {
+            return ''; // Menghilangkan angka di atas titik data
+                }
+            },
+            tooltip: {
+                enabled: false // Menonaktifkan tooltips yang muncul saat hover
+            }
         };
 
         var delayChart = new ApexCharts(document.querySelector("#delayChart"), optionsDelay);
@@ -141,7 +148,7 @@
                 height: 350
             },
             series: [{
-                name: 'Packet Loss (%)',
+                name: 'Packet Loss ()',
                 data: @json($packetLossData)
             }],
             xaxis: {
@@ -158,7 +165,7 @@
                 max: 1,  // Batas maksimum untuk 100% (packet loss)
                 labels: {
                     formatter: function(value) {
-                        return (value * 100).toFixed(0) + '%';
+                        return (value * 100).toFixed(0);
                     }
                 }
             },
@@ -171,7 +178,16 @@
                     stops: [0, 100]
                 }
             },
-            colors: ['#ff6384']
+            colors: ['#ff6384'],
+            dataLabels: {
+                enabled: true, // Menyalakan data labels jika ingin, tetapi akan dihilangkan menggunakan formatter
+                formatter: function() {
+            return ''; // Menghilangkan angka di atas titik data
+                }
+            },
+            tooltip: {
+                enabled: false // Menonaktifkan tooltips yang muncul saat hover
+            }
         };
 
         var packetLossChart = new ApexCharts(document.querySelector("#packetLossChart"), optionsPacketLoss);

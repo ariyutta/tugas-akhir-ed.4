@@ -44,12 +44,12 @@ class MonitoringKomunikasiController extends Controller
         $data = $dataPacketLoss->merge($dataDelay);
 
         // Persiapkan data untuk grafik
-        $delayData = $data->take(20)->pluck('delay'); // Mengambil data delay
-        $packetLossData = $data->take(20)->pluck('lost_packets')->map(function ($value) {
+        $delayData = $data->take(100)->pluck('delay'); // Mengambil data delay
+        $packetLossData = $data->take(100)->pluck('lost_packets')->map(function ($value) {
             // Mengganti null dengan 0 dan memastikan hanya ada 0 atau 1
             return $value == null ? 0 : $value;
         });        // Mengambil data packet loss percentage
-        $labels = $data->take(20)->pluck('sent_at')->map(function ($date) {
+        $labels = $data->take(100)->pluck('sent_at')->map(function ($date) {
             return Carbon::parse($date)->format('H:i'); // Format jam dan menit
         });
 
